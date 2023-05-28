@@ -47,6 +47,10 @@ if (!class_exists('CR_Testimonials')) {
             require_once CR_TESTIMONIALS_PATH . 'post-types/class.cr-testimonials-cpt.php';
             $CRTestimonialsPostType = new CR_Testimonials_Post_Type();
 
+            //Regiserts the widget class
+            require_once CR_TESTIMONIALS_PATH . 'widgets/class.cr-testimonials-widget.php';
+            $CRTestimonialsWidget = new CR_Testimonials_Widget();
+
         }
 
         /**
