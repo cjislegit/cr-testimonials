@@ -30,8 +30,49 @@ class CR_Testimonials_Widget extends WP_Widget
     //Must have function called form, takes an instance which is an array that containes the widgets form fields stored in the db
     public function form($instance)
     {
-        # code...
-    }
+        $title = 'Test Title';
+        $number = 5;
+        $image = false;
+        $occupation = true;
+        $company = true;
+        ?>
+
+<p>
+    <label for="<?=$this->get_field_id('title');?>"><?php esc_html_e('Title', 'cr-testimonials');?>:</label>
+    <input type="text" class="widefat" id="<?=$this->get_field_id('title');?>" name="<?=$this->get_field_id('title');?>"
+        value="<?=esc_attr($title)?>">
+</p>
+
+<p>
+    <label
+        for="<?=$this->get_field_id('number');?>"><?php esc_html_e('Number of testimonials to show', 'cr-testimonials');?>:</label>
+    <input type="number" class="tiny-text" id="<?=$this->get_field_id('number');?>" step="1" min="1" size="3"
+        name="<?=$this->get_field_id('number');?>" value="<?=esc_attr($number)?>">
+</p>
+
+<p>
+    <input type="checkbox" class="checkbox" id="<?=$this->get_field_id('image');?>"
+        name="<?=$this->get_field_id('image');?>" <?php checked($image)?>>
+    <label
+        for="<?=$this->get_field_id('image');?>"><?php esc_html_e('Display user image?', 'cr-testimonials');?>:</label>
+</p>
+
+<p>
+    <input type="checkbox" class="checkbox" id="<?=$this->get_field_id('occupation');?>"
+        name="<?=$this->get_field_id('occupation');?>" <?php checked($occupation)?>>
+    <label
+        for="<?=$this->get_field_id('occupation');?>"><?php esc_html_e('Display occupation?', 'cr-testimonials');?>:</label>
+</p>
+
+<p>
+    <input type="checkbox" class="checkbox" id="<?=$this->get_field_id('company');?>"
+        name="<?=$this->get_field_id('company');?>" <?php checked($company)?>>
+    <label
+        for="<?=$this->get_field_id('company');?>"><?php esc_html_e('Display company?', 'cr-testimonials');?>:</label>
+</p>
+
+<?php
+}
 
     //Must have function called widget which shows the content in the front end. Takes 2 args, one is args which contains the html mark up of the widget and the other is instance same as in form
     public function widget($args, $instance)
