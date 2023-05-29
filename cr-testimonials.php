@@ -51,6 +51,12 @@ if (!class_exists('CR_Testimonials')) {
             require_once CR_TESTIMONIALS_PATH . 'widgets/class.cr-testimonials-widget.php';
             $CRTestimonialsWidget = new CR_Testimonials_Widget();
 
+            //Lets us use a custom file to replace default archive page
+            add_filter('archive_template', array($this, 'load_custom_archive_template'));
+
+            //Lets us use a custom file to replace default single page
+            add_filter('single_template', array($this, 'load_custom_single_template'));
+
         }
 
         /**
@@ -62,6 +68,28 @@ if (!class_exists('CR_Testimonials')) {
             define('CR_TESTIMONIALS_PATH', plugin_dir_path(__FILE__));
             define('CR_TESTIMONIALS_URL', plugin_dir_url(__FILE__));
             define('CR_TESTIMONIALS_VERSION', '1.0.0');
+        }
+
+        public function load_custom_archive_template($tpl)
+        {
+            //Checks if the theme allows support
+            if (current_theme_supports('cr-testimonials')) {
+                if (is_post_type_archive('cr-testimonials')) {
+                    $tpl = CR_TESTIMONIALS_PATH . 'views/templates/archive-cr-testimonials.php';
+                }
+            }
+            return $tpl;
+        }
+
+        public function load_custom_single_template($tpl)
+        {
+            //Checks if the theme allows support
+            if (current_theme_supports('cr-testimonials')) {
+                if (is_singular('cr-testimonials')) {
+                    $tpl = CR_TESTIMONIALS_PATH . 'views/templates/single-cr-testimonials.php';
+                }
+            }
+            return $tpl;
         }
 
         /**
